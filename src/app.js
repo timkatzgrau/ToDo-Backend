@@ -12,7 +12,7 @@ app.use(bodyParser.urlencoded({extended: false}))
 
 require('./routes')(app)
 
-sequelize.sync({force: true})
+sequelize.sync()
 	.then(() => {
 		app.listen(config.port)
 		console.log('success listen on port: ' + config.port)
