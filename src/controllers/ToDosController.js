@@ -1,15 +1,15 @@
-const {ToDo} = require('../models')
+const {todo} = require('../models')
 
 module.exports = {
 	async getAllToDos(req, res) {
 		try {
-			const todos = await ToDo.findAll({
+			const current = await todo.findAll({
 				where: {
-					user_ID: req.body.id
+					user_id: req.body.id
 				}
 			})
 
-			res.send(todos)
+			res.send(current)
 		} catch (err) {
 			res.status(500).send({
 				error: 'An error occurred fetching the todos.  Try again.'

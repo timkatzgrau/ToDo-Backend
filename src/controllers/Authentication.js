@@ -1,10 +1,10 @@
-const {User} = require('../models')
+const {user} = require('../models')
 
 module.exports = {
 	async register(req, res){
 		try{
-	  		const user = await User.create(req.body)
-	  		res.send(user.toJSON())
+	  		const newuser = await user.create(req.body)
+	  		res.send(newuser.toJSON())
 		} catch (err){
 			//username exists
 			res.status(400).send({
@@ -15,24 +15,24 @@ module.exports = {
 	async login(req, res){
 		try{
 			const {username, password} = req.body
-	  		const user = await User.findOne({
+	  		const current = await user.findOne({
 	  			where: {
 	  				username: username
 	  			}
 	  		})
-	  		if (!user){
+	  		if (!current){
 	  			return res.status(403).send({
 	  				error: 'Invalid login information.'
 	  			})
 	  		}
 
-	  		const isPasswordValid = password === user.password
+	  		const isPasswordValid = password === current.password
 	  		if(!isPasswordValid){
 	  			return res.status(403).send({
 	  				error: 'Invalid login information.'
 	  			})
 	  		}
-	  		res.send(user.toJSON())
+	  		res.send(current.toJSON())
 		} catch (err){
 			res.status(500).send({
 				error: "An error occurred."

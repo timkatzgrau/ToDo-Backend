@@ -1,9 +1,9 @@
-const {ToDo} = require('../models')
+const {todo} = require('../models')
 
 module.exports = {
 	async deleteToDo(req, res) {
 		try {
-			const todo = await ToDo.destroy({
+			const current = await todo.destroy({
 			    where: {
 			        id: req.body.id
 			    }

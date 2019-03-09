@@ -1,9 +1,11 @@
 module.exports = (sequelize, DataTypes) =>
-	sequelize.define('ToDo', {
+	sequelize.define('todo', {
 		description: {
 			type: DataTypes.TEXT,
 		},
-		user_ID: {
+		user_id: {
 			type: DataTypes.INTEGER,
 		},
-	})
+	},{
+    timestamps: false
+  })
